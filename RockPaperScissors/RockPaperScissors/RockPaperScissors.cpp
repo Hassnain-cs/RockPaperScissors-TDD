@@ -19,6 +19,13 @@ extern "C" {
             if (strcmp(player2, "Paper") == 0) return "Wrong"; // Not handled yet
         }
 
+        // Handle Paper cases
+        if (strcmp(player1, "Paper") == 0) {
+            if (strcmp(player2, "Rock") == 0) return "Player1"; // Paper beats Rock
+            if (strcmp(player2, "Scissors") == 0) return "Wrong"; // Not handled yet
+            if (strcmp(player2, "Paper") == 0) return "Wrong"; // Not handled yet
+        }
+
         // For everything else, return Wrong
         return "Wrong";
     }
