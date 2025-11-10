@@ -31,5 +31,15 @@ namespace RockPaperScissorsTests
             // Check if it returns "Player1" - this should pass now
             Assert::AreEqual("Player1", result);
         }
+
+        // Test that Scissors should lose to Rock
+        TEST_METHOD(TestPlayer2Wins_ScissorsVsRock)
+        {
+            // Call our function with Scissors and Rock
+            char* result = determineWinner("Scissors", "Rock");
+
+            // Check if it returns "Player2" - this will fail first
+            Assert::AreEqual("Player2", result);
+        }
     };
 }
