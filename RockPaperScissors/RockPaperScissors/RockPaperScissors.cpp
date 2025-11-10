@@ -8,8 +8,8 @@ extern "C" {
         // Handle Rock cases
         if (strcmp(player1, "Rock") == 0) {
             if (strcmp(player2, "Scissors") == 0) return "Player1";
+            if (strcmp(player2, "Paper") == 0) return "Player2"; // Rock loses to Paper
             if (strcmp(player2, "Rock") == 0) return "Wrong"; // Not handled yet
-            if (strcmp(player2, "Paper") == 0) return "Wrong"; // Not handled yet
         }
 
         // Handle Scissors cases  
