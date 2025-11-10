@@ -5,28 +5,20 @@
 // Our game function - will determine who wins
 extern "C" {
     char* determineWinner(const char player1[], const char player2[]) {
-        // Handle Rock cases
-        if (strcmp(player1, "Rock") == 0) {
-            if (strcmp(player2, "Scissors") == 0) return "Player1";
-            if (strcmp(player2, "Paper") == 0) return "Player2"; // Rock loses to Paper
-            if (strcmp(player2, "Rock") == 0) return "Wrong"; // Not handled yet
+        // Check all Player1 win conditions in one place
+        if ((strcmp(player1, "Rock") == 0 && strcmp(player2, "Scissors") == 0) ||
+            (strcmp(player1, "Paper") == 0 && strcmp(player2, "Rock") == 0) ||
+            (strcmp(player1, "Scissors") == 0 && strcmp(player2, "Paper") == 0)) {
+            return "Player1";
         }
 
-        // Handle Scissors cases  
-        if (strcmp(player1, "Scissors") == 0) {
-            if (strcmp(player2, "Rock") == 0) return "Player2";
-            if (strcmp(player2, "Paper") == 0) return "Player1"; // Scissors beats Paper
-            if (strcmp(player2, "Scissors") == 0) return "Wrong"; // Not handled yet
+        // Check all Player2 win conditions in one place  
+        if ((strcmp(player1, "Scissors") == 0 && strcmp(player2, "Rock") == 0) ||
+            (strcmp(player1, "Rock") == 0 && strcmp(player2, "Paper") == 0)) {
+            return "Player2";
         }
 
-        // Handle Paper cases
-        if (strcmp(player1, "Paper") == 0) {
-            if (strcmp(player2, "Rock") == 0) return "Player1"; // Paper beats Rock
-            if (strcmp(player2, "Scissors") == 0) return "Wrong"; // Not handled yet
-            if (strcmp(player2, "Paper") == 0) return "Wrong"; // Not handled yet
-        }
-
-        // For everything else, return Wrong
+        // For everything else, return Wrong (will handle Draw and Invalid later)
         return "Wrong";
     }
 }
