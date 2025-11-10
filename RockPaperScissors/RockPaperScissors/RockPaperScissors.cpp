@@ -4,23 +4,29 @@
 
 // Our game function - will determine who wins
 extern "C" {
+
+    // Helper function to check if a move is valid
+    int isValidMove(const char move[]) {
+        return strcmp(move, "Rock") == 0 ||
+            strcmp(move, "Paper") == 0 ||
+            strcmp(move, "Scissors") == 0;
+    }
+
     char* determineWinner(const char player1[], const char player2[]) {
-        // Check all Player1 win conditions in one place
+        // First check if both moves are the same (will handle Draw properly later)
+        if (strcmp(player1, player2) == 0) {
+            return "Wrong"; // Will change to "Draw" in next tests
+        }
+
+        // Check all Player1 win conditions
         if ((strcmp(player1, "Rock") == 0 && strcmp(player2, "Scissors") == 0) ||
             (strcmp(player1, "Paper") == 0 && strcmp(player2, "Rock") == 0) ||
             (strcmp(player1, "Scissors") == 0 && strcmp(player2, "Paper") == 0)) {
             return "Player1";
         }
 
-        // Check all Player2 win conditions in one place  
-        if ((strcmp(player1, "Scissors") == 0 && strcmp(player2, "Rock") == 0) ||
-            (strcmp(player1, "Rock") == 0 && strcmp(player2, "Paper") == 0) ||
-            (strcmp(player1, "Paper") == 0 && strcmp(player2, "Scissors") == 0)) {
-            return "Player2";
-        }
-
-        // For everything else, return Wrong (will handle Draw and Invalid later)
-        return "Wrong";
+        // If not Player1 win and not Draw, then Player2 wins
+        return "Player2";
     }
 }
 
