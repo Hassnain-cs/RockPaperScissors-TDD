@@ -85,5 +85,12 @@ namespace RockPaperScissorsTests
             char* result = determineWinner("Rock", "Rock");
             Assert::AreEqual("Draw", result);
         }
+
+        // Test that invalid inputs should return Invalid
+        TEST_METHOD(TestInvalidInput_BananaVsRock)
+        {
+            char* result = determineWinner("Banana", "Rock");
+            Assert::AreEqual("Invalid", result);
+        }
     };
 }
