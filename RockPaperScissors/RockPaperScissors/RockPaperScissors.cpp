@@ -15,8 +15,8 @@ extern "C" {
         // Handle Scissors cases  
         if (strcmp(player1, "Scissors") == 0) {
             if (strcmp(player2, "Rock") == 0) return "Player2";
+            if (strcmp(player2, "Paper") == 0) return "Player1"; // Scissors beats Paper
             if (strcmp(player2, "Scissors") == 0) return "Wrong"; // Not handled yet
-            if (strcmp(player2, "Paper") == 0) return "Wrong"; // Not handled yet
         }
 
         // Handle Paper cases
