@@ -13,9 +13,9 @@ extern "C" {
     }
 
     char* determineWinner(const char player1[], const char player2[]) {
-        // First check if both moves are the same (will handle Draw properly later)
+        // First check if both moves are the same - this is a Draw
         if (strcmp(player1, player2) == 0) {
-            return "Wrong"; // Will change to "Draw" in next tests
+            return "Draw";
         }
 
         // Check all Player1 win conditions
