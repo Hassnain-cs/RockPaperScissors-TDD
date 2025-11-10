@@ -1,36 +1,41 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include <string.h>  // Need this for strcmp function
+#include <string.h>
 
-// Our game function - will determine who wins
+// Our complete Rock-Paper-Scissors game function
 extern "C" {
 
-    // Helper function to check if a move is valid
+    // Helper function to validate moves
     int isValidMove(const char move[]) {
-        return strcmp(move, "Rock") == 0 ||
-            strcmp(move, "Paper") == 0 ||
-            strcmp(move, "Scissors") == 0;
+        const char* validMoves[] = { "Rock", "Paper", "Scissors" };
+        for (int i = 0; i < 3; i++) {
+            if (strcmp(move, validMoves[i]) == 0) {
+                return 1; // Move is valid
+            }
+        }
+        return 0; // Move is invalid
     }
 
+    // Main function to determine the winner
     char* determineWinner(const char player1[], const char player2[]) {
-        // First check if inputs are valid
+        // Validate both inputs first
         if (!isValidMove(player1) || !isValidMove(player2)) {
             return "Invalid";
         }
 
-        // Check if both moves are the same - this is a Draw
+        // Check for draw condition
         if (strcmp(player1, player2) == 0) {
             return "Draw";
         }
 
-        // Check all Player1 win conditions
+        // Check Player1 win conditions
         if ((strcmp(player1, "Rock") == 0 && strcmp(player2, "Scissors") == 0) ||
             (strcmp(player1, "Paper") == 0 && strcmp(player2, "Rock") == 0) ||
             (strcmp(player1, "Scissors") == 0 && strcmp(player2, "Paper") == 0)) {
             return "Player1";
         }
 
-        // If not Player1 win and not Draw, then Player2 wins
+        // If not invalid, not draw, and not Player1 win, then Player2 wins
         return "Player2";
     }
 }
@@ -42,56 +47,51 @@ namespace RockPaperScissorsTests
     TEST_CLASS(RockPaperScissorsTests)
     {
     public:
-        // Test that Rock should beat Scissors
+        // Win/Lose condition tests
         TEST_METHOD(TestPlayer1Wins_RockVsScissors)
         {
             char* result = determineWinner("Rock", "Scissors");
             Assert::AreEqual("Player1", result);
         }
 
-        // Test that Scissors should lose to Rock
         TEST_METHOD(TestPlayer2Wins_ScissorsVsRock)
         {
             char* result = determineWinner("Scissors", "Rock");
             Assert::AreEqual("Player2", result);
         }
 
-        // Test that Paper should beat Rock
         TEST_METHOD(TestPlayer1Wins_PaperVsRock)
         {
             char* result = determineWinner("Paper", "Rock");
             Assert::AreEqual("Player1", result);
         }
 
-        // Test that Rock should lose to Paper
         TEST_METHOD(TestPlayer2Wins_RockVsPaper)
         {
             char* result = determineWinner("Rock", "Paper");
             Assert::AreEqual("Player2", result);
         }
 
-        // Test that Scissors should beat Paper
         TEST_METHOD(TestPlayer1Wins_ScissorsVsPaper)
         {
             char* result = determineWinner("Scissors", "Paper");
             Assert::AreEqual("Player1", result);
         }
 
-        // Test that Paper should lose to Scissors
         TEST_METHOD(TestPlayer2Wins_PaperVsScissors)
         {
             char* result = determineWinner("Paper", "Scissors");
             Assert::AreEqual("Player2", result);
         }
 
-        // Test that same moves should result in Draw
+        // Draw condition tests
         TEST_METHOD(TestDraw_RockVsRock)
         {
             char* result = determineWinner("Rock", "Rock");
             Assert::AreEqual("Draw", result);
         }
 
-        // Test that invalid inputs should return Invalid
+        // Invalid input tests
         TEST_METHOD(TestInvalidInput_BananaVsRock)
         {
             char* result = determineWinner("Banana", "Rock");
