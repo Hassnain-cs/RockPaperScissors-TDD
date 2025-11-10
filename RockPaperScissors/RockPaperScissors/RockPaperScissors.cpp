@@ -58,5 +58,12 @@ namespace RockPaperScissorsTests
             char* result = determineWinner("Paper", "Rock");
             Assert::AreEqual("Player1", result);
         }
+
+        // Test that Rock should lose to Paper
+        TEST_METHOD(TestPlayer2Wins_RockVsPaper)
+        {
+            char* result = determineWinner("Rock", "Paper");
+            Assert::AreEqual("Player2", result);
+        }
     };
 }
