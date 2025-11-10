@@ -13,7 +13,12 @@ extern "C" {
     }
 
     char* determineWinner(const char player1[], const char player2[]) {
-        // First check if both moves are the same - this is a Draw
+        // First check if inputs are valid
+        if (!isValidMove(player1) || !isValidMove(player2)) {
+            return "Invalid";
+        }
+
+        // Check if both moves are the same - this is a Draw
         if (strcmp(player1, player2) == 0) {
             return "Draw";
         }
