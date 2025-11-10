@@ -14,7 +14,8 @@ extern "C" {
 
         // Check all Player2 win conditions in one place  
         if ((strcmp(player1, "Scissors") == 0 && strcmp(player2, "Rock") == 0) ||
-            (strcmp(player1, "Rock") == 0 && strcmp(player2, "Paper") == 0)) {
+            (strcmp(player1, "Rock") == 0 && strcmp(player2, "Paper") == 0) ||
+            (strcmp(player1, "Paper") == 0 && strcmp(player2, "Scissors") == 0)) {
             return "Player2";
         }
 
