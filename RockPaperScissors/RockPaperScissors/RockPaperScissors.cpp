@@ -10,6 +10,11 @@ extern "C" {
             return "Player1";  // Rock beats Scissors
         }
 
+        // Check if player1 has Scissors and player2 has Rock
+        if (strcmp(player1, "Scissors") == 0 && strcmp(player2, "Rock") == 0) {
+            return "Player2";  // Scissors loses to Rock
+        }
+
         // For everything else, still return Wrong
         return "Wrong";
     }
@@ -38,7 +43,7 @@ namespace RockPaperScissorsTests
             // Call our function with Scissors and Rock
             char* result = determineWinner("Scissors", "Rock");
 
-            // Check if it returns "Player2" - this will fail first
+            // Check if it returns "Player2" - this should pass now
             Assert::AreEqual("Player2", result);
         }
     };
